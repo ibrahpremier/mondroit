@@ -21,8 +21,20 @@
               </div>
               <p class="login-card-description">Connectez vous à votre compte</p>
 
-              <form action="/register" method="post">
+              <form action="#" method="post">
                 @csrf
+                <div class="form-group">
+                  <label for="type">Type</label>
+                  
+                  <select class="custom-select form-control @error('type') is-invalid @enderror" name="type"
+                  id="type" placeholder="Choisir" required>
+                      <option value="PHYSIQUE" selected>PERSONNE PHYSIQUE</option>
+                      <option value="MORALE">PERSONNE MORALE</option>
+                    </select>
+                  @error('type')
+                  <p class="text-danger">{{ $message }}</p>
+                  @enderror
+                </div>
                 <div class="form-group">
                   <label for="nom">Nom</label>
                   <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" id="nom" placeholder="Nom">
@@ -61,7 +73,7 @@
                 <div class="row">
                   <!-- /.col -->
                   <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-block">Inscription</button>
+                    <a  class="btn btn-primary btn-block" href="#">Inscription</a>
                   </div>
                 </div>
                 <!-- /.col -->
