@@ -1,7 +1,6 @@
 @extends("layout")
 
 @section("content")
-    
         <!-- Banner -->
         <section class="position-relative bg-light">
             <div id="particles_js"></div>
@@ -13,7 +12,7 @@
                             <h1 data-animate="fadeInUp" data-delay="1.2">Mondroit.bf</h1>
                             <h2 data-animate="fadeInUp" data-delay="1.3"><span class="typed"></span></h2>
                             <ul class="list-inline" data-animate="fadeInUp" data-delay="1.4">
-                                <li><a href="#" class="btn btn-primary">Espace client</a></li>
+                                <li><a href="{{route('login')}}" class="btn btn-primary">Espace client</a></li>
                                 <li><a href="#" class="btn">En savoir plus<i class="fas fa-caret-right"></i></a></li>
                             </ul>
                         </div>
@@ -21,8 +20,6 @@
                     <div class="col-lg-6 d-block">
                         <!-- Banner image -->
                         <div class="banner-image">
-                             {{-- <img src="{{asset('assets/img/justice2.png')}}" alt="" data-animate="fadeInUp" data-delay="1.5" data-depth="0.2"> --}}
-
                             <div id="carouselExampleControls" id="carousel1" class="carousel slide" data-ride="carousel"
                                 data-interval="4000">
                                 <ol class="carousel-indicators">
@@ -99,6 +96,7 @@
                                     <div class="query-info">
                                         <h4>Besoin d'un actes juridiques </h4>
                                         <span>Assistance pour redaction de contrats, conventions, avis juridiques etc</span>
+                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -110,6 +108,7 @@
                                     <div class="query-info">
                                         <h4>Procédure judiciaire</h4>
                                         <span>Besoin d'information sur la procedure judiciare à suivre</span>
+                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +120,7 @@
                                     <div class="query-info">
                                         <h4>Besoin d'un avocat</h4>
                                         <span>Je souhaite me faire representer par un avocat</span>
+                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -132,17 +132,7 @@
                                     <div class="query-info">
                                         <h4>Documents de société</h4>
                                         <span>Assistance pour la création, fusion et scission de société</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-12">
-                                <div class="single-query bg-white d-flex align-items-center" data-animate="fadeInUp" data-delay=".45">
-                                    <div class="query-icon">
-                                        <img src="{{asset('assets/img/icons/affiliate-query.svg')}}" alt="" alt="" data-no-retina class="svg">
-                                    </div>
-                                    <div class="query-info">
-                                        <h4>Consulter les dernières publications</h4>
-                                        <span>Lire les articles de droits publiés par nos experts</span>
+                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -152,8 +142,22 @@
                                         <img src="{{asset('assets/img/icons/press-query.svg')}}" alt="" alt="" data-no-retina class="svg">
                                     </div>
                                     <div class="query-info">
-                                        <h4>Contact direct</h4>
-                                        <span>Contactez directement un conseillé</span>
+                                        <h4>Je souhaite discuter par appel</h4>
+                                        <span>Un conseillé vous contactera directement par appel</span>
+                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Faire la demande</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-12">
+                                <div class="single-query bg-white d-flex align-items-center" data-animate="fadeInUp" data-delay=".45">
+                                    <div class="query-icon">
+                                        <img src="{{asset('assets/img/icons/affiliate-query.svg')}}" alt="" alt="" data-no-retina class="svg">
+                                    </div>
+                                    <div class="query-info">
+                                        <h4>Autre type de services</h4>
+                                        <span>J'ai besoin d'un service en particulier</span>
+                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -412,7 +416,7 @@
                             <img src="{{asset('assets/img/members/member1.jpg')}}" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#" target="_blank"><i class="far fa-bag"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -430,7 +434,7 @@
                             <img src="{{asset('assets/img/members/member2.jpg')}}" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#" target="_blank"><i class="far fa-bag"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -448,7 +452,7 @@
                             <img src="{{asset('assets/img/members/member3.jpg')}}" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#" target="_blank"><i class="far fa-bag"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -466,7 +470,7 @@
                             <img src="{{asset('assets/img/members/member4.jpg')}}" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#" target="_blank"><i class="far fa-bag"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -484,7 +488,7 @@
                             <img src="{{asset('assets/img/members/member5.jpg')}}" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#" target="_blank"><i class="far fa-bag"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -502,7 +506,7 @@
                             <img src="{{asset('assets/img/members/member6.jpg')}}" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#" target="_blank"><i class="far fa-bag"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -520,7 +524,7 @@
                             <img src="{{asset('assets/img/members/member7.jpg')}}" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#" target="_blank"><i class="far fa-bag"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -538,7 +542,7 @@
                             <img src="{{asset('assets/img/members/member8.jpg')}}" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#" target="_blank"><i class="far fa-bag"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>

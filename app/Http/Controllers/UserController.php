@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -24,19 +25,11 @@ class UserController extends Controller
        ]);
 
        if (Auth::attempt($credentials)) {
-           
-           if(Auth::user()->getUser()->role=='admin'){
                 $request->session()->regenerate();
-                  return redirect()->intended('/');
-           }
-
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect()->back()->withErrors([
-            "password" => "Vous n'êtes pas autorisé",
-        ]);
+                if(Auth::user()->getUser()->active){
+                    return redirect()->intended('/');
+                } 
+                return redirect()->route('paiement');
        }
 
        $flasher->addError('Les informations de connexions ne sont pas valides');
@@ -53,8 +46,9 @@ class UserController extends Controller
        $request->validate([
            'nom' => 'required',
            'prenom' => 'required',
-           'phone' => 'required|numeric',
-           'email' => 'required|email',
+           'phone' => 'required|unique:users,phone,id',
+           'email' => 'required|email|unique:users,email,id',
+           'type' => 'required',
            'password' => 'required'
         ]);
 
@@ -63,11 +57,14 @@ class UserController extends Controller
         'prenom' =>$request->prenom,
         'phone' => $request->phone,
         'email' => $request->email,
+        'type_compte' => $request->type,
         'password' => Hash::make($request->password),
       ]);
-      $flasher->addSuccess('Utilisateur créé. Veuillez vous connecter');
+      $flasher->addSuccess('Votre compte à été créé');
 
-      return redirect()->intended('login');
+    //   return redirect()->intended('login');
+
+    return redirect()->route('paiement');
    }
 
    function disconnect(Request $request, FlasherInterface $flasher)

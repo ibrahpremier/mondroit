@@ -555,7 +555,7 @@ select.parsley-error {
 }
 .section-title p {
     margin-top: 1.5rem;
-    color: #919491;
+    color: #ffffff;
 }
 
 /*=============================================
@@ -960,7 +960,7 @@ canvas {
 }
 .single-pricing-plan strong sub {
     font-size: 0.875rem;
-    color: #919491;
+    color: #ffffff;
     font-weight: 400;
     bottom: 0;
     left: -0.25rem;
@@ -1002,7 +1002,7 @@ canvas {
     left: 1rem;
 }
 .single-review-slide span {
-    color: #919491;
+    color: #ffffff;
     display: block;
     margin-bottom: 1.25rem;
 }
@@ -1029,7 +1029,7 @@ canvas {
 .server-btn {
     padding-left: 0;
     padding-right: 0;
-    color: #919491;
+    color: #ffffff;
 }
 .server-btn svg {
     margin-left: 0.5rem;
@@ -1060,13 +1060,13 @@ canvas {
     color: #fff;
 }
 .footer-contacts li a {
-    color: #919491;
+    color: #ffffff;
 }
 .footer-contacts li a:hover {
     color: #fff;
 }
 .social-links a svg {
-    color: #919491;
+    color: #ffffff;
 }
 .social-links a:hover svg {
     color: #fff;
@@ -1075,7 +1075,7 @@ canvas {
 
 /* 10.2: Footer posts */
 .footer-posts a {
-    color: #919491;
+    color: #ffffff;
 }
 .footer-posts a:hover {
     color: #fff;
@@ -1101,7 +1101,7 @@ canvas {
 }
 .single-footer-post span {
     font-size: 0.75rem;
-    color: #919491;
+    color: #ffffff;
 }
 .single-footer-post p a {
     display: block;
@@ -1142,10 +1142,10 @@ canvas {
     padding: 1rem 0 3rem;
 }
 .copyright a{
-    color: #919491;
+    color: #ffffff;
 }
 .footer-menu a {
-    color: #919491;
+    color: #ffffff;
 }
 .footer-menu a:hover {
     color: #fff;
@@ -1334,7 +1334,7 @@ canvas {
 }
 .single-post span {
     font-size: 0.75rem;
-    color: #919491;
+    color: #ffffff;
     display: block;
     margin-top: 0.5rem;
 }
@@ -1342,7 +1342,7 @@ canvas {
     line-height: 1.625rem;
 }
 .single-post a {
-    color: #919491;
+    color: #ffffff;
     font-size: 0.75rem;
     text-transform: uppercase;
 }
@@ -1376,10 +1376,10 @@ canvas {
     margin-bottom: .5rem;
     display: block;
     font-size: 0.75rem;
-    color: #919491;
+    color: #ffffff;
 }
 .post-content span a {
-    color: #919491;
+    color: #ffffff;
 }
 .post-content span a:hover {
     color: #007bff;
@@ -1418,7 +1418,7 @@ canvas {
     margin-bottom: 30px;
 }
 .custom-pagination a {
-    color: #919491;
+    color: #ffffff;
 }
 .custom-pagination .active a,
 .custom-pagination a:hover {
@@ -1493,7 +1493,7 @@ canvas {
 .prev-next a {
     font-size: 12px;
     text-transform: uppercase;
-    color: #919491;
+    color: #ffffff;
 }
 .prev-next a:hover {
     color: #007bff;
@@ -1538,7 +1538,7 @@ canvas {
 }
 .comment-content span {
     font-size: 0.75rem;
-    color: #919491;
+    color: #ffffff;
     display: block;
     margin-bottom: 0.25rem;
 }
@@ -1602,7 +1602,7 @@ canvas {
     content: '';
     position: absolute;
     width: 100%;
-    border-bottom: 1px dotted #919491;
+    border-bottom: 1px dotted #717271;
     bottom: 0.4375rem;
     z-index: -1;
 }
@@ -1610,7 +1610,7 @@ canvas {
     border-bottom: 1px dotted #007bff;
 }
 .widget-categories span {
-    background: #fff;
+    /* background: #fff; */
     display: inline-block;
     padding-right: 0.25rem;
 }
@@ -1632,7 +1632,7 @@ canvas {
     margin-top: 0.5rem;
 }
 .recent-posts li:not(:last-child) {
-    border-bottom: 1px dotted #919491;
+    border-bottom: 1px dotted #ffffff;
     padding-bottom: 0.5rem;
 }
 .recent-posts li a {
@@ -1687,7 +1687,7 @@ canvas {
 }
 .tags a {
     font-size: 0.75rem;
-    color: #919491;
+    color: #ffffff;
 }
 .tags a:hover {
     color: #007bff;
@@ -1722,7 +1722,7 @@ canvas {
     margin-bottom: 0.5rem;
 }
 .query-info a {
-    color: #919491;
+    color: #ffffff;
 }
 .single-query:hover .query-info a {
     color: #ff6c00;

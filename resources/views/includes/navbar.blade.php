@@ -29,7 +29,7 @@
                         <div class="col-lg-2 col-md-3 col-sm-3 col-9">
                             <!-- Logo -->
                             <div class="logo" data-animate="fadeInUp" data-delay=".7">
-                                <a href="#">
+                                <a href="{{route('home')}}">
                                     <img src="{{asset('assets/img/logo-small.png')}}" alt="logo">
                                 </a>
                             </div>
@@ -39,18 +39,18 @@
                                 <!-- Header-menu -->
                                 <div class="header-menu">
                                     <ul>
-                                        <li class="active"><a href="#">Accueil</a></li>
+                                        <li class="active"><a href="{{route('home')}}">Accueil</a></li>
                                         <li>
                                             <a href="#">Publications <i
                                                     class="fas fa-caret-down"></i></a>
                                             <ul>
-                                                <li><a href="#">Droit du travail</a></li>
-                                                <li><a href="#">Droit du commerce</a></li>
-                                                <li><a href="#">Droit Civil</a></li>
-                                                <li><a href="#">Etc...</a></li>
+                                                <li><a href="{{route('categorie.show',1)}}">Droit du travail</a></li>
+                                                <li><a href="{{route('categorie.show',2)}}">Droit du commerce</a></li>
+                                                <li><a href="{{route('categorie.show',3)}}">Droit Civil</a></li>
+                                                <li><a href="{{route('categorie.show',4)}}">Etc...</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Cabinets Partenaire</a></li>
+                                        <li><a href="{{route('partenaire.index')}}">Cabinets Partenaire</a></li>
                                         <li><a href="#">Contact</a></li>
                                         <li>
                                             <a href="#">A propos </a>

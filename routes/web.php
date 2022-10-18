@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PartenaireController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategorieArticleController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +21,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
+
+Route::get('/activation', function () {
+    return view('paiement');
+})->name('paiement');
+
+Route::resources([
+    'partenaire'=>PartenaireController::class,
+    'article'=>ArticleController::class,
+    'categorie'=>CategorieArticleController::class,
+    'ticket'=>TicketController::class,
+]);
 
 Route::get('/login', function () { return view('login');})->name('login');
 Route::get('/register', function () { return view('register');})->name('register');
