@@ -1,13 +1,20 @@
 @extends('layout')
 
 @section('content')
-
+<style>
+    .image-hover-wrap {
+       text-align: center;
+    }
+    .image-hover-wrap img{
+        height: 220px !important;
+    }
+</style>
 <section class="page-title-wrap position-relative bg-light">
     <div id="particles_js"></div>
     <div class="container">
         <div class="row">
             <div class="col-2 pt-5 pb-5">
-                <img src="{{asset('assets/img/huissier.jpg')}}" alt="" alt="" data-no-retina class="svg">
+                <img src="{{asset($domaine->icon)}}" alt="" alt="" data-no-retina class="svg">
             </div>
             <div class="col-9">
                 <div class="page-title position-relative pt-5 pb-5">
@@ -16,7 +23,7 @@
                         <li><i class="fas fa-angle-double-right"></i></li>
                         <li><a href="#">Cabinets Partenaires</a></li>
                     </ul>
-                    <h1 data-animate="fadeInUp" data-delay="1.3">Cabinets Partenaires</h1>
+                    <h1 data-animate="fadeInUp" data-delay="1.3">{{$domaine->nom}}</h1>
                 </div>
             </div>
             <div class="col-1">
@@ -28,172 +35,79 @@
     </div>
 </section>
 
-        <!-- Our services -->
-        <section>
-            <div class="services-title position-relative pt-7 bg-light">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-6 col-lg-8">
-                            <div class="section-title text-center">
-                                <h2 data-animate="fadeInUp" data-delay=".1">Nous reunissons les meilleurs pour vous
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="services-wrap bg-primary position-relative pt-5 pb-5">
-                <div class="container">
-                    <!-- All services -->
+    <!-- Blog -->
+    <section class="blog pt-3 pb-7">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay="0">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member1.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
+                <div class="col-md-8 order-last">
+                    <!-- Posts -->
+                    <div class="row">
+
+                @foreach ($partenaires as $item)
+                        <div class="col-md-6">
+                            <div class="single-post" data-animate="fadeInUp" data-delay=".1">
+                                <div class="image-hover-wrap">
+                                    <img src="{{asset($item->logo)}}" alt="">
+                                    <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
+                                        <ul class="list-inline">
+                                            <li><a href="{{route('organisation.show',$item->id)}}"><i class="fas fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {{-- <span>Posted on <a href="#">Jan 19, 2017</a></span> --}}
+                                <h4>{{$item->nom}}</h4>
+                                <span class="text-dark">{{$item->short_description}}</span>
+                                <a href="{{route('organisation.show',$item->id)}}" class="btn btn-warning p-2"><i class="fas fa-eye"></i>Voir profil</a>
+                                <a href="{{route('ticket.create',['p'=>$item->id])}}" class="btn btn-primary p-2 float-right">Contacter<i class="fas fa-phone"></i></a>
                             </div>
                         </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Vivian J. Rogers</h4>
-                            <span>Cheife Executive Officer (CEO)</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
+                @endforeach
                     </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".1">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member2.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Marie S. Higginbotham</h4>
-                            <span>Senior Marketing Officer</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".2">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member3.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Larry W. Oliver</h4>
-                            <span>Managing Director</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".3">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member4.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Michelle R. Weiss</h4>
-                            <span>Production Manager</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".4">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member5.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Christine T. McCallister</h4>
-                            <span>Relationship Manager</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".5">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member6.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Leroy L. Bowen</h4>
-                            <span>Co-Founder Director</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".6">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member7.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Lee A. Funderburg</h4>
-                            <span>Junior Creative Director</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".7">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member8.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Ricky M. Hallett</h4>
-                            <span>Senior Marketing Officer</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
+
+                    <!-- Pagination -->
+                    <ul class="custom-pagination list-inline text-center text-uppercase mt-4" data-animate="fadeInUp" data-delay=".1">
+                        <li class="float-left disabled"><a href="#"><i class="fas fa-caret-left"></i> Precedent</a></li>
+                        <li class="active"><a href="#">01</a></li>
+                        <li><a class="text-secondary" href="#">02</a></li>
+                        <li><a class="text-secondary" href="#">03</a></li>
+                        <li><a class="text-secondary" href="#">04</a></li>
+                        <li><a class="text-secondary" href="#">05</a></li>
+                        <li class="float-right"><a class="text-secondary" href="#">Suivant <i class="fas fa-caret-right"></i></a></li>
+                    </ul>
                 </div>
 
-            </div>
+                <!-- Sidebar -->
+                <div class="col-md-4">
+                    <aside>
+                        <div class="single-widget" data-animate="fadeInUp" data-delay=".1">
+                            <form action="#">
+                                <div class="form-group position-relative mb-0">
+                                    <input class="form-control" type="text" placeholder="Rechercher" data-parsley-required-message="Please type at least one word." data-parsley-minlength="3" data-parsley-minlength-message="Please type at least one word." required>
+                                    <button type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="single-widget" data-animate="fadeInUp" data-delay=".1">
+                            <h3 data-animate="fadeInUp" data-delay=".2">Catégories</h3>
+                            <ul class="mb-0">
+
+                                @foreach ($domaines as $item)
+                                    <li data-animate="fadeInUp" data-delay=".25"><a href="{{route('partenaire.show',$item->id)}}"><span>{{$item->nom}}</span></a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+
+                        <div class="single-widget text-center" data-animate="fadeInUp" data-delay=".1">
+                            <h3 data-animate="fadeInUp" data-delay=".2">Publicité</h3>
+                            <img src="img/camera.jpg" alt="" data-animate="fadeInUp" data-delay=".25">
+                        </div>
+                    </aside>
                 </div>
             </div>
-        </section>
-        <!-- End of Our services -->
+        </div>
+    </section>
+    <!-- End of Blog -->
+
 @endsection

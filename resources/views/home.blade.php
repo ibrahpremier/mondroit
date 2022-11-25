@@ -1,6 +1,20 @@
 @extends("layout")
 
 @section("content")
+<style>
+    .image-hover-wrap img{
+        width: 300px !important;
+        height: 150px !important;
+    }
+
+
+    .truncate-title {
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
         <!-- Banner -->
         <section class="position-relative bg-light">
             <div id="particles_js"></div>
@@ -12,8 +26,13 @@
                             <h1 data-animate="fadeInUp" data-delay="1.2">Mondroit.bf</h1>
                             <h2 data-animate="fadeInUp" data-delay="1.3"><span class="typed"></span></h2>
                             <ul class="list-inline" data-animate="fadeInUp" data-delay="1.4">
-                                <li><a href="{{route('login')}}" class="btn btn-primary">Espace client</a></li>
-                                <li><a href="#" class="btn">En savoir plus<i class="fas fa-caret-right"></i></a></li>
+
+                            @if (GlobalHelpers::getLoggedUser())
+                            <li><a href="{{route('ticket.create',['q'=>0])}}" class="btn btn-primary p-2 text-white">Demander assistance<i class="fas fa-caret-right"></i></a></li>
+                            @else
+                            <li><button onclick="goToPlan()" class="btn btn-danger">Créer un compte</button></li>
+                            <li><a href="{{route('auth.loginform')}}" class="btn btn-primary p-2 text-white">Se connecter<i class="fas fa-caret-right"></i></a></li>
+                            @endif
                             </ul>
                         </div>
                     </div>
@@ -78,13 +97,13 @@
 
 
     <!-- Contact page content -->
-    <section class="pt-7 pb-7 bg-light">
+    <section class="pt-7 pb-7 bg-light" id="services">
         <div class="container">
             <div class="row align-items-lg-end">
                 <div class="col-md-12">
                     <div class="section-title">
                         <h2 data-animate="fadeInUp" data-delay=".1" class="text-primary">Comment pouvons nous vous aidez ?</h2>
-                        <p data-animate="fadeInUp" data-delay=".2">Selectionnez votre préocupation dans la liste ci-dessous et l'un de nos expert vous assistera au plus vite </p>
+                        <p data-animate="fadeInUp" data-delay=".2" class="text-danger">Selectionnez votre préocupation dans la liste ci-dessous et l'un de nos expert vous assistera au plus vite </p>
                     </div>
                     <div class="queries-wrap">
                         <div class="row">
@@ -96,7 +115,7 @@
                                     <div class="query-info">
                                         <h4>Besoin d'un actes juridiques </h4>
                                         <span>Assistance pour redaction de contrats, conventions, avis juridiques etc</span>
-                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
+                                        <a class="btn btn-primary" href="{{route('ticket.create',['q'=>1])}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +127,7 @@
                                     <div class="query-info">
                                         <h4>Procédure judiciaire</h4>
                                         <span>Besoin d'information sur la procedure judiciare à suivre</span>
-                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
+                                        <a class="btn btn-primary" href="{{route('ticket.create',['q'=>2])}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +139,7 @@
                                     <div class="query-info">
                                         <h4>Besoin d'un avocat</h4>
                                         <span>Je souhaite me faire representer par un avocat</span>
-                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
+                                        <a class="btn btn-primary" href="{{route('ticket.create',['q'=>3])}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +151,7 @@
                                     <div class="query-info">
                                         <h4>Documents de société</h4>
                                         <span>Assistance pour la création, fusion et scission de société</span>
-                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
+                                        <a class="btn btn-primary" href="{{route('ticket.create',['q'=>4])}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +163,7 @@
                                     <div class="query-info">
                                         <h4>Je souhaite discuter par appel</h4>
                                         <span>Un conseillé vous contactera directement par appel</span>
-                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Faire la demande</a>
+                                        <a class="btn btn-primary" href="{{route('ticket.create',['q'=>5])}}">Faire la demande</a>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +176,7 @@
                                     <div class="query-info">
                                         <h4>Autre type de services</h4>
                                         <span>J'ai besoin d'un service en particulier</span>
-                                        <a class="btn btn-primary" href="{{route('ticket.create')}}">Nous contactez</a>
+                                        <a class="btn btn-primary" href="{{route('ticket.create',['q'=>6])}}">Nous contactez</a>
                                     </div>
                                 </div>
                             </div>
@@ -193,6 +212,7 @@
         </div>
     </section>
     <!-- End of Contact page content -->
+    <div id="register"></div>
 
         <section class="mt-3">
             <div class="container">
@@ -201,7 +221,7 @@
                 <div id="carouselExampleControls" id="carousel2" class="carousel slide carousel-fade"
                     data-ride="carousel" data-interval="2000">
 
-                    <div class="carousel-inner">
+                    <div class="carousel-inner" id="pub1">
                         <div class="carousel-item active">
                             <img class="d-block w-100" src="https://via.placeholder.com/750x100.png" alt="First slide">
                         </div>
@@ -227,6 +247,7 @@
         </section>
 
 
+        @if (!GlobalHelpers::getLoggedUser())
         <!-- Pricing plans -->
         <section class="pricing-plans pt-7 pb-7 bg-info text-white">
             <div class="container">
@@ -276,7 +297,7 @@
                                         class="fas fa-check-circle"></i>perspiciatis
                                 </li>
                             </ul>
-                            <!-- <a href="#" class="btn" data-animate="fadeInUp" data-delay=".7">View Payment Method <i class="fas fa-caret-right"></i></a> -->
+                             <a href="{{route('auth.registerform',['t'=>'partenaire'])}}" class="text-primary bg-light mt-2 p-2" data-animate="fadeInUp" data-delay=".7">Proposer mes services en tant que partenaire <i class="fas fa-caret-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -287,9 +308,9 @@
                                         <img src="{{asset('assets/img/icons/bandwidth.svg')}}" alt="" alt="" data-no-retina class="svg">
                                         <h4>Personne <br> Physique</h4>
                                         <span class="time roboto">Plan annuel</span>
-                                        <strong class="roboto">5000 <sub>FCFA/an</sub></strong>
+                                        <strong class="roboto">1000 <sub class="text-warning">FCFA/an</sub></strong>
                                         {{-- <p class="text-primary">Billed <span>15.000 FCFA</span> Per Moth <br>30 Days Money Back Guarantee</p> --}}
-                                        <a href="#" class="btn btn-primary">Souscrire</a>
+                                        <a href="{{route('auth.registerform',['t'=>'physique'])}}" class="btn btn-primary">Souscrire</a>
                                     </div>
                                 </div>
                             </div>
@@ -299,9 +320,9 @@
                                         <img src="{{asset('assets/img/icons/enterprise.svg')}}" alt="" alt="" data-no-retina class="svg">
                                         <h4>Personne <br> Morale</h4>
                                         <span class="time roboto">Plan annuel</span>
-                                        <strong class="roboto">15.000 <sub>FCFA/an</sub></strong>
+                                        <strong class="roboto">50.000 <sub class="text-warning">FCFA/an</sub></strong>
                                         <!-- <p>Billed <span>$114</span> Per Moth <br>30 Days Money Back Guarantee</p> -->
-                                        <a href="#" class="btn btn-primary">Souscrire</a>
+                                        <a href="{{route('auth.registerform',['t'=>'morale'])}}" class="btn btn-primary">Souscrire</a>
                                     </div>
                                 </div>
                             </div>
@@ -313,6 +334,7 @@
             </div>
         </section>
         <!-- End of Pricing plans -->
+        @endif
 
         <!-- Features -->
         <section class="pt-7 pb-5-5">
@@ -333,8 +355,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <span>Par Autheur le 19 Jan 2022</span>
-                        <h4>Torrent Pirates Prefer To Pay For Video Streaming Services</h4>
+                        <span class="text-info">Par Autheur le 19 Jan 2022</span>
+                        <h4 class="truncate-title">Torrent Pirates Prefer To Pay For Video Streaming Services</h4>
                         <a href="#">Lire l'article<i class="fas fa-caret-right"></i></a>
                     </div>
                 </div>
@@ -348,8 +370,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <span>Par Autheur le 19 Jan 2022</span>
-                        <h4>How to Watch Emmett VS Stephens at UFC Fight Night FOX</h4>
+                        <span class="text-info">Par Autheur le 19 Jan 2022</span>
+                        <h4 class="truncate-title">How to Watch Emmett VS Stephens at UFC Fight Night FOX</h4>
                         <a href="#">Lire l'article<i class="fas fa-caret-right"></i></a>
                     </div>
                 </div>
@@ -363,8 +385,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <span>Par Autheur le 19 Jan 2022</span>
-                        <h4>Web Hosting Powerhouse Go Daddy to Expand Its Civil Service</h4>
+                        <span class="text-info">Par Autheur le 19 Jan 2022</span>
+                        <h4 class="truncate-title">Web Hosting Powerhouse Go Daddy to Expand Its Civil Service</h4>
                         <a href="#">Lire l'article<i class="fas fa-caret-right"></i></a>
                     </div>
                 </div>
@@ -378,8 +400,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <span>Par Autheur le 19 Jan 2022</span>
-                        <h4>Encryption Must Not Be Compromised by Backdoors</h4>
+                        <span class="text-info">Par Autheur le 19 Jan 2022</span>
+                        <h4 class="truncate-title">Encryption Must Not Be Compromised by Backdoors</h4>
                         <a href="#">Lire l'article<i class="fas fa-caret-right"></i></a>
                     </div>
                 </div>
@@ -410,151 +432,29 @@
                 <div class="container">
                     <!-- All services -->
             <div class="row">
+                @foreach ($partenaires as $item)
                 <div class="col-lg-3 col-md-4 col-sm-6">
+                        
                     <div class="single-member" data-animate="fadeInUp" data-delay="0">
                         <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member1.jpg')}}" alt="">
+                            <img src="{{asset($item->logo)}}" height="90" alt="">
                             <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
                                 <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
+                                    <li><a  href="{{route('organisation.show',$item->id)}}"><i class="fas fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="single-member-info bg-light">
-                            <h4>Vivian J. Rogers</h4>
-                            <span>Cheife Executive Officer (CEO)</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
+                            <h4 class="truncate-title">{{$item->nom}}</h4>
+                            <span style="height: 75px">{{$item->short_description}}</span>
+                            <a  href="{{route('organisation.show',$item->id)}}" class="btn btn-link text-warning">Consulter <i class="fas fa-caret-right"></i></a>
                         </div>
                     </div>
                 </div>
+                @endforeach
                 
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".1">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member2.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Marie S. Higginbotham</h4>
-                            <span>Senior Marketing Officer</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".2">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member3.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Larry W. Oliver</h4>
-                            <span>Managing Director</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".3">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member4.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Michelle R. Weiss</h4>
-                            <span>Production Manager</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".4">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member5.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Christine T. McCallister</h4>
-                            <span>Relationship Manager</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".5">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member6.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Leroy L. Bowen</h4>
-                            <span>Co-Founder Director</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".6">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member7.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Lee A. Funderburg</h4>
-                            <span>Junior Creative Director</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-member" data-animate="fadeInUp" data-delay=".7">
-                        <div class="image-hover-wrap">
-                            <img src="{{asset('assets/img/members/member8.jpg')}}" alt="">
-                            <div class="image-hover-content d-flex justify-content-center align-items-center text-center">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="single-member-info bg-light">
-                            <h4>Ricky M. Hallett</h4>
-                            <span>Senior Marketing Officer</span>
-                            <a href="#">En savoir plus <i class="fas fa-caret-right"></i></a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-12 text-right"> <a href="#" class="btn btn-default">Voir plus</a></div>
+                <div class="col-md-12 text-right"> <a href="{{route('partenaire.index')}}" class="btn btn-default">Voir plus</a></div>
             </div>
                 </div>
             </div>
@@ -685,7 +585,7 @@
                     <div class="col-xl-4 col-lg-5">
                         <div class="section-title">
                             <h2 data-animate="fadeInUp" data-delay=".1">Couverture nationnal</h2>
-                            <p data-animate="fadeInUp" data-delay=".2">Nos spécialistes sont repartis et competent pour
+                            <p data-animate="fadeInUp" data-delay=".2" class="text-info">Nos spécialistes sont repartis et competent pour
                                 intervenir sur l'ensemble du territoire du national</p>
                         </div>
                         <p>
@@ -743,4 +643,16 @@
         </section> --}}
         <!-- End of Our clients -->
 
+@endsection
+
+@section('custom_script')
+    <script>
+
+        function goToPlan(){
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#register").offset().top
+            }, 1000);
+        }
+        
+      </script>
 @endsection

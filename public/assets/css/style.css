@@ -1277,7 +1277,7 @@ canvas {
     transition: all 0.2s;
 }
 .back-to-top a:hover {
-    background: #22c111;
+    background: #007bff;
     color: #fff;
 }
 

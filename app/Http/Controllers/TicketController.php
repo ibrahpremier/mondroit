@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GlobalHelpers;
+use App\Models\Organisation;
 use App\Models\Ticket;
+use Flasher\Prime\FlasherInterface;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -22,9 +25,15 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('new-ticket');
+        $partenaire = null;
+        $q = $request->input('q');
+        $p = $request->input('p');
+        if($p){
+            $partenaire = Organisation::findOrFail($p);
+        }
+        return view('new-ticket',compact('q','partenaire'));
     }
 
     /**
@@ -33,9 +42,24 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, FlasherInterface $flasher)
     {
-        //
+        $request->validate([
+            'objet' => 'required',
+            'msg' => 'required',
+        ]);
+
+        $ticket = Ticket::create([
+            'objet' => $request->input('objet'),
+            'message' => $request->input('msg'),
+            'type' => $request->input('type'),
+            'user_id' => GlobalHelpers::getLoggedUser()->id,
+            'target_user_id' => $request->input('target_user_id'),
+        ]);
+
+      $flasher->addSuccess('Votre requête à été prise en compte');
+
+      return redirect()->route('home.index');
     }
 
     /**

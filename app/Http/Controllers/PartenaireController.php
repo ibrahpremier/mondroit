@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Domaine;
+use App\Models\Organisation;
 use Illuminate\Http\Request;
 
 class PartenaireController extends Controller
@@ -13,7 +15,8 @@ class PartenaireController extends Controller
      */
     public function index()
     {
-        return view('partenaires');
+        $domaines = Domaine::where('estPartenaire',true)->get();
+        return view('partenaires',compact('domaines'));
     }
 
     /**
@@ -45,7 +48,10 @@ class PartenaireController extends Controller
      */
     public function show($id)
     {
-        return view('partenaire');
+        $domaine = Domaine::find($id);
+        $domaines = Domaine::where('estPartenaire',1)->get();
+        $partenaires = Organisation::where('domaine_id',$id)->get();
+        return view('partenaire',compact('partenaires','domaine','domaines'));
     }
 
     /**

@@ -18,11 +18,13 @@ return new class extends Migration
             $table->string('nom');
             $table->string('phone');
             $table->string('email');
-            $table->string('logo');
-            $table->string('description');
+            $table->string('logo')->nullable();
+            $table->string('domaine')->nullable();
+            $table->string('description')->nullable();
+            $table->string('short_description')->nullable();
             $table->boolean('active')->default(true);
             $table->foreignId('user_id');
-            $table->foreignId('approuved_by')->constrained('users')->nullable();
+            $table->foreignId('approuved_by')->nullable()->constrained('users');
             $table->timestamp('approuved_at')->nullable();
             $table->string('lib_doc_1')->nullable();
             $table->string('lib_doc_2')->nullable();
@@ -32,6 +34,7 @@ return new class extends Migration
             $table->string('val_doc_2')->nullable();
             $table->string('val_doc_3')->nullable();
             $table->string('val_doc_4')->nullable();
+            $table->foreignId('domaine_id');
             $table->timestamps();
         });
     }

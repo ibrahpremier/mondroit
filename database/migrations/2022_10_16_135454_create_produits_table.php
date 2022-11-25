@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained('users');
             $table->boolean('active')->default(false);
             $table->timestamp('approuved_at');
-            $table->foreignId('approuved_by')->constrained('users');
+            $table->foreignId('approuved_by')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

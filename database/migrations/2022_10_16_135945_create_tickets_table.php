@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('objet');
             $table->string('message');
-            $table->boolean('active');
+            $table->boolean('type')->default(1);
             $table->integer('status')->default(1);
             $table->foreignId('user_id');
-            $table->foreignId('target_user_id')->constrained('users')->nullable();
+            $table->foreignId('target_user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

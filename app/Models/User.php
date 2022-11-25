@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,7 +25,9 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
-        'type_compte'
+        'type_compte',
+        'approuved_by',
+        'approuved_at',
     ];
 
     /**
@@ -44,4 +48,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getUser()
+    {
+        return $this;
+    }
+
+    public function getDateIntronisationAttribute($date)
+    {
+        return Carbon::create($date)->format('d/m/Y');
+    }
 }

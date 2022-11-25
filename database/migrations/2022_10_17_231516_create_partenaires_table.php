@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('active')->default(false);
             $table->foreignId('categorie_partenaire_id');
             $table->foreignId('user_id');
-            $table->foreignId('approuved_by')->constrained('users')->nullable();
+            $table->foreignId('approuved_by')->nullable()->constrained('users');
             $table->timestamp('approuved_at')->nullable();
             $table->string('lib_doc_1')->nullable();
             $table->string('lib_doc_2')->nullable();

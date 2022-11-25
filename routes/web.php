@@ -5,6 +5,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategorieArticleController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrganisationController;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\TicketController;
 
 /*
@@ -20,25 +23,31 @@ use App\Http\Controllers\TicketController;
 
 
 Route::get('/', function () {
-    return view('home');
-})->name('home');
+    return redirect()->route('home.index');
+});
 
-Route::get('/activation', function () {
-    return view('paiement');
-})->name('paiement');
+// Route::get('/activation', function () {
+//     return view('paiement');
+// })->name('paiement');
+
+Route::resources([
+    'home'=>HomeController::class,
+]);
 
 Route::resources([
     'partenaire'=>PartenaireController::class,
     'article'=>ArticleController::class,
     'categorie'=>CategorieArticleController::class,
     'ticket'=>TicketController::class,
-]);
+    'paiement'=>PaiementController::class,
+    'organisation'=>OrganisationController::class,
+],['middleware' => ['auth']]);
 
-Route::get('/login', function () { return view('login');})->name('login');
-Route::get('/register', function () { return view('register');})->name('register');
+Route::get('/login',[UserController::class,'loginForm'])->name('auth.loginform');
+Route::get('/register',[UserController::class,'registerForm'])->name('auth.registerform');
 
 
-Route::post('/login',[UserController::class,'login'])->name('auth.connect');
+Route::post('/login',[UserController::class,'login'])->name('auth.login');
 Route::post('/register',[UserController::class,'register'])->name('auth.register');
 
 

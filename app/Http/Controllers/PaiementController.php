@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\paiement;
+use App\Models\TypeCompte;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaiementController extends Controller
 {
@@ -14,7 +16,8 @@ class PaiementController extends Controller
      */
     public function index()
     {
-        //
+        $type_compte = TypeCompte::where('short_name',Auth::user()->getUser()->type_compte)->first();
+        return view('paiement',compact('type_compte'));
     }
 
     /**

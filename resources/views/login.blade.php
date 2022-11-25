@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mondroit.bf | Connexion</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/login.css">
-
+  @include('includes.head_import')
   <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
-  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+  @include('includes.navbar')
+  <main class="d-flex align-items-center min-vh-50 py-3 py-md-0">
     <div class="container">
       <div class="card login-card">
         <div class="row no-gutters">
@@ -24,7 +24,7 @@
               </div>
               <p class="login-card-description">Connectez vous à votre compte</p>
 
-      <form action="{{route('auth.connect')}}" method="post">
+      <form action="{{route('auth.login')}}" method="post">
         @csrf
         <div class="form-group">
           {{-- <label for="phone">Téléphone</label> --}}
@@ -42,18 +42,19 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <a href="#" class="btn btn-primary btn-block">Connexion</a>
+            <button type="submit" class="btn btn-primary btn-block">Connexion</button>
           </div>
         </div>
-        <p class="mb-0 mt-3 text-right">
+        {{-- <p class="mb-0 mt-3 text-right">
           <a href="/register" class="text-primary">S'inscrire</a>
-        </p>
+        </p> --}}
+        <p class="mb-0 mt-3 text-right">Vous n'avez pas de compte? <a href="/#pub1" class="text-primary">S'inscrire</a></p>
       </form>
-                {{-- <a href="#!" class="forgot-password-link">Forgot password?</a>
-                <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
-                <nav class="login-card-footer-nav">
-                  <a href="#!">Terms of use.</a>
-                  <a href="#!">Privacy policy</a> --}}
+                <a href="#!" class="forgot-password-link">Mot de passe oublié?</a>
+                {{-- <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p> --}}
+                <nav class="login-card-footer-nav text-right">
+                  <a class="text-primary" href="#!">Termes et Conditions</a> |
+                  <a class="text-primary" href="{{route('auth.registerform',['t'=>'partenaire'])}}">Devenir Partenaire</a>
                 </nav>
             </div>
           </div>

@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('type_compte');
+            $table->string('type_compte');
             $table->boolean('active')->default(false);
             $table->timestamp('email_verified_at')->nullable();
-            $table->foreignId('approuved_by')->constrained('users')->nullable();
+            $table->foreignId('approuved_by')->nullable()->constrained('users');
             $table->timestamp('approuved_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

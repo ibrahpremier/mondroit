@@ -40,6 +40,7 @@
 
     <!-- JS Files -->
     @include("includes.script_import")
+    @yield('custom_script')
 </body>
 
 </html>
